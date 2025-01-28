@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan RFID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Scan RFID</h1>
+    <button id="scan-btn">Scan Kartu</button>
+    <p id="status">Klik tombol untuk mulai scan kartu.</p>
+    
+    <div id="data-container">
+        <div class="data-row">
+            <span class="data-label">ID :</span>
+            <span class="data-value" id="rfid-id">-</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Nama Hewan :</span>
+            <span class="data-value" id="animal-name">-</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Info :</span>
+            <span class="data-value" id="animal-info">-</span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('scan-btn').addEventListener('click', async () => {
+            // Menampilkan status "menunggu scan kartu"
+            document.getElementById('status').textContent = 'Menunggu scan kartu...';
+            document.getElementById('rfid-id').textContent = '-'; // Reset RFID ID sebelumnya
+            document.getElementById('animal-name').textContent = '-'; // Reset nama hewan sebelumnya
+            document.getElementById('animal-info').textContent = '-'; // Reset info hewan sebelumnya
+
+            try {
+                // Menunggu data RFID yang diterima
+                const response = await fetch('http://localhost:3001/get-rfid', { method: 'GET' });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const rfid = data.rfid;
+
+                    if (rfid) {
+                        // Menampilkan ID RFID yang berhasil dipindai
+                        document.getElementById('rfid-id').textContent = rfid;
+
+                        // Mengirimkan request ke server untuk mengambil data hewan berdasarkan RFID
+                        const animalResponse = await fetch('http://localhost:3001/scan', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ rfid })
+                        });
+
+                        const animalData = await animalResponse.json();
+
+                        if (animalResponse.ok) {
+                            // Menampilkan status dan data hewan jika ditemukan
+                            document.getElementById('status').textContent = 'Data ditemukan!';
+                            document.getElementById('animal-name').textContent = animalData.animal.nama;
+                            document.getElementById('animal-info').textContent = animalData.animal.info_tambahan;
+                        } else {
+                            // Menampilkan pesan error jika data hewan tidak ditemukan
+                            document.getElementById('status').textContent = animalData.message;
+                        }
+                    } else {
+                        // Jika tidak ada RFID yang diterima
+                        document.getElementById('status').textContent = 'Tidak ada data RFID yang diterima!';
+                    }
+                } else {
+                    // Menampilkan error jika tidak bisa mendapatkan data RFID
+                    document.getElementById('status').textContent = 'Tidak dapat menerima data RFID!';
+                }
+            } catch (error) {
+                // Menampilkan error jika gagal terhubung ke server
+                document.getElementById('status').textContent = 'Koneksi ke server gagal. Pastikan server berjalan!';
+                console.error('Error fetching RFID:', error);
+            }
+        });
+    </script>
+</body>
+</html>

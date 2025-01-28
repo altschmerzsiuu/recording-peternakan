@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Peternakan RFID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Dashboard Peternakan RFID</h1>
+
+    <nav>
+        <ul>
+            <li><a href="add-livestock.html">Tambah Data Ternak</a></li>
+            <li><a href="check-rfid.html">Cek Data Berdasarkan RFID</a></li>
+            <li><a href="scan-rfid.html">Scan RFID</a></li>
+            <li><a href="view-livestock.html">Cek Semua Data Ternak</a></li>
+        </ul>
+    </nav>
+
+    <div id="data-container" class="title-dashboard">
+        <!-- Kotak Status -->
+        <div class="status-box">
+            <h2>Status Ternak</h2>
+            <p><strong>Jumlah Ternak Terdaftar:</strong> <span id="livestock-count">Memuat...</span></p>
+            <button>Perbarui Status</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".status-box button").addEventListener("click", function() {
+            fetch('http://localhost:3002/api/updateLivestockStatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    livestockId: 1,  // ID ternak yang ingin diperbarui
+                    newStatus: 'Status Baru'  // Status yang ingin diperbarui
+                })
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                // Lakukan pembaruan status di UI jika sukses
+                alert(data.message); // Menampilkan pesan sukses
+                fetchLivestockCount(); // Memperbarui jumlah ternak setelah status diperbarui
+            })
+
+            .catch(error => {
+                console.error('Terjadi kesalahan:', error);
+                alert('Gagal memperbarui status ternak.');
+            });
+
+        });
+    
+        function fetchLivestockCount() {
+            fetch('http://localhost:3002/api/getLivestockCount')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Mengubah respons menjadi JSON
+                })
+                .then(data => {
+                    console.log('Jumlah Ternak:', data.count);
+                    document.getElementById('livestock-count').textContent = data.count;
+                })
+                .catch(error => {
+                    console.error('Error fetching livestock count:', error);
+                    document.getElementById('livestock-count').textContent = 'Gagal memuat';
+                });
+        }
+        // Memuat jumlah ternak saat pertama kali
+        fetchLivestockCount();
+    </script>    
+</body>
+
+</html>

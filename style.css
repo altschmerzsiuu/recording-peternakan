@@ -1,0 +1,313 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    margin: 5px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#livestock-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#livestock-list li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#livestock-list li button {
+    background-color: #f44336;
+}
+
+#scan-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#scan-btn:hover {
+    background-color: #45a049;
+}
+
+#status {
+    text-align: center;
+    margin: 10px 0;
+    color: #555;
+}
+
+#data-container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* ID dan Label lebih lebar */
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.data-label {
+    font-weight: bold;
+    color: #333;
+    text-align: right; /* Membuat titik dua sejajar */
+    padding-right: 10px; /* Memberi sedikit ruang untuk titik dua */
+}
+
+.data-value {
+    color: #555;
+}
+
+/* Reset margin dan padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Font keluarga untuk keseluruhan halaman */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigasi */
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    font-size: 1.1rem;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Tombol Umum */
+button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Kontainer data dan form */
+#data-container {
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Input dan form field */
+input {
+    padding: 12px;
+    width: 250px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    border: 2px solid #4CAF50;
+}
+
+/* Daftar ternak */
+#livestock-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#livestock-list li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#livestock-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#livestock-list li button {
+    background-color: #f44336;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#livestock-list li button:hover {
+    background-color: #e53935;
+}
+
+/* Responsif untuk tampilan mobile */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input {
+        width: 200px;
+    }
+
+    button {
+        padding: 10px 18px;
+    }
+
+    #data-container {
+        padding: 15px;
+    }
+}
+
+/* Kotak status atau notifikasi */
+.status-box {
+    background-color: #ffecb3;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.status-box h2 {
+    font-size: 1.5rem;
+    color: #f57c00;
+    margin-bottom: 10px;
+}
+
+.status-box p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.search-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.result-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+

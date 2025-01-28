@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Data Berdasarkan RFID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Cek Data Berdasarkan RFID</h1>
+    <input type="text" id="rfid_id" placeholder="Masukkan RFID ID">
+    <button onclick="fetchLivestockByRFID()">Cek Data</button>
+    <div id="livestock-info"></div>
+
+    <script>
+        async function fetchLivestockByRFID() {
+            const rfidId = document.getElementById('rfid_id').value;
+            const response = await fetch(`http://localhost:3000/livestock/${rfidId}`);
+            const data = await response.json();
+            const infoDiv = document.getElementById('livestock-info');
+            if (data) {
+                infoDiv.innerHTML = `
+                    <strong>ID: ${data.id}</strong><br>
+                    <strong>Nama: ${data.nama}</strong><br>
+                    RFID: ${data.rfid_code}<br>
+                    Info: ${data.info_tambahan || 'Tidak ada info tambahan'}
+                `;
+            } else {
+                infoDiv.innerHTML = 'Ternak tidak ditemukan.';
+            }
+        }
+    </script>
+</body>
+
+</html>

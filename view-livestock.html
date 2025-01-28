@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Semua Data Ternak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Semua Data Ternak</h1>
+    <ul id="livestock-list"></ul>
+
+    <script>
+        async function fetchLivestock() {
+            const response = await fetch('http://localhost:3000/livestock');
+            const data = await response.json();
+
+            const livestockList = document.getElementById('livestock-list');
+            livestockList.innerHTML = '';
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${item.id}</strong><br>
+                    <strong>${item.nama}</strong> (RFID: ${item.rfid_code})<br>
+                    Info: ${item.info_tambahan || 'Tidak ada info tambahan'}
+                `;
+                livestockList.appendChild(li);
+            });
+        }
+
+        fetchLivestock();
+    </script>
+</body>
+
+</html>
