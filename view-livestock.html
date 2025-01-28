@@ -13,8 +13,11 @@
     <ul id="livestock-list"></ul>
 
     <script>
+        // Gantilah URL dengan server yang sudah dideploy
+        const baseUrl = 'https://recording-backend-3.onrender.com'; // Ubah sesuai dengan URL server yang sudah dideploy
+
         async function fetchLivestock() {
-            const response = await fetch('http://localhost:3000/livestock');
+            const response = await fetch(`${baseUrl}/livestock`);
             const data = await response.json();
 
             const livestockList = document.getElementById('livestock-list');
@@ -22,8 +25,8 @@
             data.forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                    <strong>${item.id}</strong><br>
-                    <strong>${item.nama}</strong> (RFID: ${item.rfid_code})<br>
+                    <strong>ID: ${item.id}</strong><br>
+                    <strong>Nama: ${item.nama}</strong> (RFID: ${item.rfid_code})<br>
                     Info: ${item.info_tambahan || 'Tidak ada info tambahan'}
                 `;
                 livestockList.appendChild(li);
