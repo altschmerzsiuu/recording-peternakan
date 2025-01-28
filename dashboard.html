@@ -31,7 +31,7 @@
 
     <script>
         document.querySelector(".status-box button").addEventListener("click", function() {
-            fetch('http://localhost:3002/api/updateLivestockStatus', {
+            fetch('https://recording-backend-3.onrender.com/api/updateLivestockStatus', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +58,7 @@
         });
     
         function fetchLivestockCount() {
-            fetch('http://localhost:3002/api/getLivestockCount')
+            fetch('https://recording-backend-3.onrender.com/api/getLivestockCount')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
