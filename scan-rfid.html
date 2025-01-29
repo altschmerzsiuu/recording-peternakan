@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan RFID</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <h1>Scan RFID</h1>
     <button id="scan-btn">Scan Kartu</button>
     <p id="status">Klik tombol untuk mulai scan kartu.</p>
-
+    
     <div id="data-container">
         <div class="data-row">
             <span class="data-label">ID :</span>
@@ -38,7 +36,7 @@
 
             try {
                 // Menunggu data RFID yang diterima
-                const response = await fetch('https://recording-backend-3.onrender.com/get-rfid', { method: 'GET' });
+                const response = await fetch('http://localhost:3001/get-rfid', { method: 'GET' });
 
                 if (response.ok) {
                     const data = await response.json();
@@ -49,7 +47,7 @@
                         document.getElementById('rfid-id').textContent = rfid;
 
                         // Mengirimkan request ke server untuk mengambil data hewan berdasarkan RFID
-                        const animalResponse = await fetch('https://recording-backend-3.onrender.com/scan', {
+                        const animalResponse = await fetch('http://localhost:3001/scan', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ rfid })
@@ -82,5 +80,4 @@
         });
     </script>
 </body>
-
 </html>
